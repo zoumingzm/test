@@ -1,6 +1,6 @@
 package com.zm.sysout;
 
-import java.io.PrintWriter;
+import java.io.PrintStream;
 
 /**
  * Created by Administrator on 2017/3/6.
@@ -16,17 +16,7 @@ public class SysoutOverrite {
     }
 
     public static void method(int a, int b){
-        PrintWriter pw = new PrintWriter(System.out){
-//            @Override
-//            public void write(String s) {
-//                if ("a=10".equals(s)){
-//                    s = "a=100";
-//                }else {
-//                    s = "b=100";
-//                }
-//                super.write(s);
-//            }
-
+        PrintStream ps = new PrintStream(System.out){
             @Override
             public void println(String x) {
                 if ("a=10".equals(x)){
@@ -37,5 +27,6 @@ public class SysoutOverrite {
                 super.println(x);
             }
         };
+        System.setOut(ps);
     }
 }
