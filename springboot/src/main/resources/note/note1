@@ -1,0 +1,6 @@
+POST（@RequestBody）异常:
+There was an unexpected error (type=Unsupported Media Type, status=415).
+解决办法：
+请求头设置 Content-type=application/json;charset=UTF-8
+
+自己实现Util便于管理，否则人员众多情况下

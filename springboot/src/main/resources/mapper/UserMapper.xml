@@ -9,11 +9,15 @@
         <![CDATA[
        INSERT INTO user
        (
+       username,
+       password,
            name,
            age
        )
        VALUES
        (
+          #{userName, jdbcType=VARCHAR},
+          #{password, jdbcType=VARCHAR},
            #{name, jdbcType=VARCHAR},
            #{age, jdbcType=INTEGER}
        )

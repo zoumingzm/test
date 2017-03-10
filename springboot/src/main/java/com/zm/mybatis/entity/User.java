@@ -1,5 +1,8 @@
 package com.zm.mybatis.entity;
 
+import com.zm.Utils.Md5Util;
+import com.zm.Utils.StringUtil;
+import com.zm.exception.PasswordInvalidException;
 import java.util.Date;
 
 /**
@@ -8,6 +11,10 @@ import java.util.Date;
 public class User {
 
     private String id;
+
+    private String userName;
+
+    private String password;
 
     private String name;
 
@@ -23,6 +30,25 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        if (StringUtil.isEmpty(password)){
+            throw new PasswordInvalidException("password is empty.");
+        }
+        this.password = Md5Util.encodeMd5(password);
     }
 
     public String getName() {
