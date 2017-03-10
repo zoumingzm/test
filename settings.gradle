@@ -1,4 +1,5 @@
 rootProject.name = 'test'
-include 'java-core'
 include 'springboot'
+include 'grpc'
+include 'javacore'
 
