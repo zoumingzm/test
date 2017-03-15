@@ -1,7 +1,7 @@
 package com.zm.mybatis.entity;
 
-import com.zm.Utils.Md5Util;
-import com.zm.Utils.StringUtil;
+import com.zm.common.utils.Md5Util;
+import com.zm.common.utils.StringUtil;
 import com.zm.exception.PasswordInvalidException;
 import java.util.Date;
 

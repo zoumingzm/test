@@ -43,6 +43,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':common')
     //spring boot
 //    compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-configuration-processor")
