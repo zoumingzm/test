@@ -4,15 +4,17 @@ package com.zm.sort;
  * 直接插入排序
  * Created by Administrator on 2017/3/17.
  */
-public class StraightInsertionSort extends BaseSort{
+public class StraightInsertionSort implements BaseSort{
 
     public static void main(String[] args){
-        Integer[] ary = initInteger();
-        sortAsc(ary);
+        BaseSort _this = new StraightInsertionSort();
+        Integer[] ary = _this.initInteger();
+        _this.sort(ary);
 
     }
 
-    public static void sortAsc(Integer[] a){
+    @Override
+    public void sort(Integer[] a){
         for(int i= 1; i<a.length; i++){
             int temp = a[i];  //哨兵
             int j = i - 1;
