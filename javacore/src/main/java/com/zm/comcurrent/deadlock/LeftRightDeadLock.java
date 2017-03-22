@@ -28,18 +28,12 @@ public class LeftRightDeadLock {
 
     public static void main(String[] args){
         LeftRightDeadLock leftRightDeadLock = new LeftRightDeadLock();
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                leftRightDeadLock.leftRight();
-            }
+        Thread t1 = new Thread(() -> {
+            leftRightDeadLock.leftRight();
         });
 
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                leftRightDeadLock.rightLeft();
-            }
+        Thread t2 = new Thread(() -> {
+            leftRightDeadLock.rightLeft();
         });
 
         t1.start();

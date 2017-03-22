@@ -12,20 +12,12 @@ public class DynamicSequenceDeadLock {
         Account account1 = _this.new Account();
         Account account2 = _this.new Account();
 
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                _this.transferMoney(account1,account2,BigDecimal.ZERO);
-
-            }
+        Thread t1 = new Thread(() -> {
+            _this.transferMoney(account1,account2,BigDecimal.ZERO);
         });
 
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                _this.transferMoney(account2,account1,BigDecimal.ZERO);
-
-            }
+        Thread t2 = new Thread(()-> {
+            _this.transferMoney(account2,account1,BigDecimal.ZERO);
         });
 
         t1.start();

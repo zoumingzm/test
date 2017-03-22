@@ -16,7 +16,8 @@ public class BubbleSort implements BaseSort{
     @Override
     public void sort(Integer[] ary){
         for (int i = 0; i<ary.length; i++){
-            for (int j = 0; j<ary.length; j++){
+            //每循环一次找出一个最值，每循环一次最多会交换n*(n-1)次
+            for (int j = i+1; j<ary.length; j++){
                 if (ary[i] < ary[j]){
                     int temp = ary[i];
                     ary[i] = ary[j];

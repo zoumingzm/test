@@ -21,5 +21,11 @@ public interface BaseSort {
 
     }
 
+    default void exchange(Integer[] ary, int indexA, int indexB){
+        int temp = ary[indexA];
+        ary[indexA] = ary[indexB];
+        ary[indexB] = temp;
+    }
+
     void sort(Integer[] ary);
 }

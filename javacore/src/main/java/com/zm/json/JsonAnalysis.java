@@ -11,7 +11,7 @@ import java.util.Stack;
 public class JsonAnalysis {
 
     public static void main(String[] args){
-        String json = "{aa:11,bb:{cc:{dd:22}},ee:{ff:'33'}}";
+        String json = "{aa:11,bb:{cc:{dd:22}},ee:{ff:'33',gg:44}}";
 
         if (json.length() - json.replace("{","").length() != json.length() - json.replace("}","").length()){
          throw new IllegalStateException("expression is error.");
