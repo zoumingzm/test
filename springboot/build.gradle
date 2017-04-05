@@ -63,6 +63,8 @@ dependencies {
     compile 'io.springfox:springfox-swagger2:2.2.2'
     compile 'io.springfox:springfox-swagger-ui:2.2.2'
 
+    compile 'org.slf4j:osgi-over-slf4j:1.7.6'
+
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
