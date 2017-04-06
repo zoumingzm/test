@@ -45,10 +45,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        if (StringUtil.isEmpty(password)){
-            throw new PasswordInvalidException("password is empty.");
-        }
-        this.password = Md5Util.encodeMd5(password);
+        this.password = password;
     }
 
     public String getName() {

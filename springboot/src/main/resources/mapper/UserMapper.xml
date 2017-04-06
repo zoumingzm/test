@@ -4,6 +4,11 @@
 <!-- 指定工作空间，要与接口名相同，通过"这里的namespace.下边方法的id"来定位方法的 -->
 <mapper namespace="com.zm.mybatis.mapper.UserMapper">
 
+    <resultMap id="BaseResultMap" type="com.zm.mybatis.entity.User">
+        <result column="username" property="userName" />
+        <result column="password" property="password" />
+    </resultMap>
+
     <!-- 若不需要自动返回主键，将useGeneratedKeys="true" keyProperty="id"去掉即可(当然如果不需要自动返回主键，直接用注解即可) -->
     <insert id="insertUserWithBackId" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
@@ -23,5 +28,11 @@
        )
        ]]>
     </insert>
+
+    <select id="getById" resultMap="BaseResultMap">
+        SELECT username,password
+        FROM user
+        WHERE id = #{id}
+    </select>
 
 </mapper>

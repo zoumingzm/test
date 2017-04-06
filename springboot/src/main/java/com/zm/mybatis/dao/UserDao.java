@@ -16,4 +16,8 @@ public class UserDao {
     public Integer insertUserWithBackId(User user){
         return userMapper.insertUserWithBackId(user);
     }
+
+    public User getById(Integer id){
+        return userMapper.getById(id);
+    }
 }
