@@ -28,13 +28,12 @@ public class ExpressionAnalysis {
         boolean isAdd = true;
         for (int i = 0; i < str.length() ; i++) {
             switch (str.charAt(i)){
-                case '+':isAdd=false;
-                case '-':isAdd=false;
-                case '*':isAdd=false;
-                case '(':isAdd=false;
-                case ')':isAdd=false;
+                case '+':
+                case '-':
+                case '*':
+                case '(':
+                case ')':
                 case '/':isAdd=false;assemble(linkedList, temp, String.valueOf(str.charAt(i)));break;
-
                 default:temp = isAdd ? temp+str.charAt(i) : ""+str.charAt(i);isAdd=true; break;
             }
             if (i == str.length()-1) assemble(linkedList, temp, null);
