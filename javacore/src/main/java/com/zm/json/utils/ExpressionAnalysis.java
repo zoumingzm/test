@@ -13,6 +13,7 @@ import static java.lang.System.out;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by zouming on 17-4-13.
@@ -52,7 +53,7 @@ public class ExpressionAnalysis {
         if (StringUtil.isNotEmpty(temp)){
             stack.add(temp);
         }
-        if (c!=null && StringUtil.isNotEmpty(c.toString())){
+        if (Optional.of(c).isPresent() && StringUtil.isNotEmpty(c.toString())){
             stack.add(c.toString());
         }
     }
