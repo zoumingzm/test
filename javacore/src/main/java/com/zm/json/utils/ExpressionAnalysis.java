@@ -1,5 +1,7 @@
 package com.zm.json.utils;
 
+import com.zm.common.utils.StringUtil;
+import com.zm.json.Exception.ExpressionErrorException;
 import com.zm.json.expression.Expression;
 import com.zm.json.expression.OperatorEnum;
 import com.zm.json.service.Calculate;
@@ -33,22 +35,51 @@ public class ExpressionAnalysis {
                 case '*':
                 case '(':
                 case ')':
-                case '/':isAdd=false;assemble(linkedList, temp, String.valueOf(str.charAt(i)));break;
+                case '/':isAdd=false;assemble(linkedList, temp, String.valueOf(str.charAt(i)));temp="";break;
                 default:temp = isAdd ? temp+str.charAt(i) : ""+str.charAt(i);isAdd=true; break;
             }
             if (i == str.length()-1) assemble(linkedList, temp, null);
         }
 
         out.println(linkedList.toString());
-        this.cal(linkedList);
+        this.calBrackets(linkedList);//计算括号内
+        this.cal(linkedList);//计算剩下的
         out.println(Arrays.toString(linkedList.toArray()));
         return null;
     }
 
     public void assemble(List<String> stack, String temp, CharSequence c){
-        stack.add(temp);
-        if (c!=null){
+        if (StringUtil.isNotEmpty(temp)){
+            stack.add(temp);
+        }
+        if (c!=null && StringUtil.isNotEmpty(c.toString())){
             stack.add(c.toString());
+        }
+    }
+
+    private void calBrackets(List<String> linkedList) throws Exception{
+        int i = 0;//记录遍历位置
+        int j = 0;//记录实际位置
+        while ( i < linkedList.size()){
+            if (")".equals(linkedList.get(i))){
+                int start = linkedList.subList(0, i).lastIndexOf("(");//取出匹配的左括号
+
+                List list = new LinkedList<>();
+                list.addAll(linkedList.subList(start,i));//临时列表
+                list.remove(0);//移除左括号
+                if (list.size() == 0){
+                    throw new ExpressionErrorException("index " + j + " near error.");
+                }
+                this.cal(list);//括号优先级最高，因此先计算
+                linkedList.subList(start,i+1).clear();//移除当前匹配括号以及其内容
+
+                if (list!=null && !list.isEmpty()) {
+                    linkedList.addAll(start, list);//将计算结果插入到start位置
+                }
+                i = start;//列表长度已改变，从本次计算的start位置开始遍历
+            }
+            i++;//列表长度未改变，从i+1位置继续遍历
+            j++;
         }
     }
 
@@ -72,7 +103,7 @@ public class ExpressionAnalysis {
     @Test
     public void test(){
         try {
-            getExpression("1000000+1/6");
+            getExpression("(1)*(((1+1))+1)/(3*3)");
         }catch (Exception e){
             e.printStackTrace();
         }
