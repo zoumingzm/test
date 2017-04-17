@@ -1,4 +1,4 @@
-package com.zm.comcurrent.deadlock;
+package com.zm.concurrent.deadlock;
 
 import java.math.BigDecimal;
 

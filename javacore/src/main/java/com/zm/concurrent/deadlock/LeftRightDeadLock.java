@@ -1,4 +1,4 @@
-package com.zm.comcurrent.deadlock;
+package com.zm.concurrent.deadlock;
 
 /**
  * Created by Administrator on 2017/3/12.
