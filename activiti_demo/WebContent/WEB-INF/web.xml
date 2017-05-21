@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+<display-name>activiti</display-name>  
+    
+   <listener>  
+      <listener-class>  
+         org.springframework.web.context.ContextLoaderListener  
+      </listener-class>  
+   </listener>  
+     
+     <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:activiti.cfg.xml</param-value>
+    </context-param>
+    
+    <servlet>
+        <servlet-name>restful</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <init-param>
+	            <param-name>contextConfigLocation</param-name>
+	            <param-value>classpath:spring/rest-servlet.xml</param-value>
+	        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>restful</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    
+  <welcome-file-list>    
+    <welcome-file>index.jsp</welcome-file>    
+  </welcome-file-list>  
+</web-app>

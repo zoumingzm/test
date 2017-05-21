@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- http://host/swagger-ui/#/ http://host/v2/api-docs -->
+	<!-- swagger-ui api doc view resourecs -->
+	<!-- <mvc:resources mapping="/swagger-ui/**" location="/swagger-ui/" />
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" /> -->
+
+	<!-- 指定IOC扫描包 -->
+	<context:annotation-config/>
+	    <context:component-scan base-package="com.zm">
+    </context:component-scan>
+    
+	<!-- open annotation auto driven -->
+	<mvc:annotation-driven>
+		<!-- req & resp message convert -->
+		<mvc:message-converters>
+			<!-- IO convert -->
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+			<!-- responseBody is domain convert Json String -->
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<!-- the value is null column will be remove -->
+						<property name="serializationInclusion" value="NON_NULL" />
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
+	<!-- upload maxSize config -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="80000000" />
+		<!-- 上传限制 80M -->
+	</bean>
+
+	<!-- JSP view resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1" />
+	</bean>
+
+	<task:annotation-driven/>
+
+</beans>
